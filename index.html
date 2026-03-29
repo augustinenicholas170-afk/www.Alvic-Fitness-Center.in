@@ -504,11 +504,7 @@ footer{position:relative;z-index:2;background:var(--black);border-top:1px solid 
       <i class="fas fa-exclamation-triangle"></i>
       <span id="alreadyMarkedText">Attendance already marked today.</span>
     </div>
-    <div class="modal-sheet-hint">
-      <i class="fas fa-table"></i>
-      <span>Attendance will be saved to Google Sheet automatically. <strong style="color:#fff;">Paste your Google Apps Script Web App URL below once.</strong></span>
-    </div>
-    <div id="scriptUrlConfig" style="margin-bottom:18px;"></div>
+    <!-- Google Sheet is connected via hardcoded script URL -->
     <button id="submitAttendance" onclick="submitAttendance()" disabled>
       <i class="fas fa-calendar-check"></i> Submit Attendance
     </button>
@@ -615,7 +611,8 @@ const STUDENTS = [
 ].sort();
 
 const STORAGE_KEY = 'alvic_attendance_log';
-const SCRIPT_KEY  = 'alvic_apps_script_url';
+// ✅ YOUR GOOGLE APPS SCRIPT URL — hardcoded so it works on ALL phones
+const APPS_SCRIPT_URL = 'PASTE_YOUR_SCRIPT_URL_HERE';
 let selectedStudent = null;
 
 function todayStr(){
@@ -641,42 +638,7 @@ function markLocalLog(name){
   if(!log[key].includes(name))log[key].push(name);
   localStorage.setItem(STORAGE_KEY,JSON.stringify(log));
 }
-function getScriptUrl(){return localStorage.getItem(SCRIPT_KEY)||'';}
-
-function saveScriptUrl(){
-  const url=document.getElementById('scriptUrlInput').value.trim();
-  if(!url){alert('Please enter a valid URL.');return;}
-  localStorage.setItem(SCRIPT_KEY,url);
-  renderScriptConfig();
-}
-function resetScriptUrl(){
-  localStorage.removeItem(SCRIPT_KEY);
-  renderScriptConfig();
-}
-
-function renderScriptConfig(){
-  const saved=getScriptUrl();
-  const cfg=document.getElementById('scriptUrlConfig');
-  if(saved){
-    cfg.innerHTML=`<div style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(26,158,63,0.1);border:1px solid rgba(26,158,63,0.3);border-radius:8px;">
-      <i class="fas fa-check-circle" style="color:#4cde7f;"></i>
-      <span style="font-family:'Rajdhani',sans-serif;font-size:.85rem;color:#4cde7f;letter-spacing:.5px;">Google Sheet connected ✓</span>
-      <button onclick="resetScriptUrl()" style="margin-left:auto;background:none;border:none;color:rgba(255,255,255,0.35);cursor:pointer;font-size:.8rem;font-family:'Rajdhani',sans-serif;">Change</button>
-    </div>`;
-  } else {
-    cfg.innerHTML=`
-      <label class="modal-label" for="scriptUrlInput">
-        <i class="fas fa-link" style="margin-right:6px;"></i>Google Apps Script URL <span style="color:rgba(255,255,255,0.35);font-size:.7rem;">(one-time setup)</span>
-      </label>
-      <input type="url" id="scriptUrlInput" placeholder="https://script.google.com/macros/s/…/exec"
-        style="width:100%;padding:11px 14px;background:rgba(0,30,70,0.6);border:1px solid rgba(0,112,224,0.3);border-radius:8px;color:#fff;font-family:'Exo 2',sans-serif;font-size:.88rem;outline:none;margin-bottom:8px;"
-        autocomplete="off"/>
-      <button onclick="saveScriptUrl()" style="padding:8px 18px;background:rgba(0,112,224,0.25);border:1px solid rgba(0,112,224,0.5);border-radius:6px;color:#60b0ff;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:2px;cursor:pointer;">
-        <i class="fas fa-save" style="margin-right:6px;"></i>SAVE URL
-      </button>
-      <p style="font-family:'Rajdhani',sans-serif;font-size:.7rem;color:rgba(255,255,255,0.25);margin-top:6px;">Saved locally in your browser. Never shared.</p>`;
-  }
-}
+function getScriptUrl(){ return APPS_SCRIPT_URL; }
 
 function openAttendance(){
   selectedStudent=null;
@@ -692,7 +654,6 @@ function openAttendance(){
   document.getElementById('attendanceResult').className='';
   document.getElementById('submitAttendance').disabled=true;
   document.getElementById('submitAttendance').innerHTML='<i class="fas fa-calendar-check"></i> Submit Attendance';
-  renderScriptConfig();
   setTimeout(()=>document.getElementById('attendanceInput').focus(),200);
 }
 
