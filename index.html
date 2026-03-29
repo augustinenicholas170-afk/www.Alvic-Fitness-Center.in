@@ -81,7 +81,7 @@ nav.shrunk{height:58px;background:rgba(0,0,0,0.98);}
 
 @keyframes shimmer{0%{background-position:0%}100%{background-position:300%}}
 
-/* ══ HERO ══ */
+/* HERO */
 #home{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;z-index:1;padding-top:var(--nav-h);}
 .hero-bg-img{position:absolute;inset:0;background-image:url('https://content.jdmagicbox.com/comp/trichy/h2/0431px431.x431.220318225244.f2h2/catalogue/alvic-gym-and-fitness-centre-unisex-gym-trichy-82vtx5moiu.jpg');background-size:cover;background-position:center top;filter:brightness(0.18) saturate(0.4);}
 .hero-overlay{position:absolute;inset:0;background:linear-gradient(110deg,rgba(0,0,0,0.93) 48%,rgba(226,0,26,0.1) 100%),radial-gradient(ellipse at 80% 50%,rgba(226,0,26,0.12) 0%,transparent 60%);}
@@ -108,7 +108,6 @@ nav.shrunk{height:58px;background:rgba(0,0,0,0.98);}
 .btn-ghost{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.9rem;letter-spacing:3px;text-transform:uppercase;padding:12px 30px;background:transparent;color:var(--silver);border:1px solid rgba(192,192,192,0.35);border-radius:3px;cursor:pointer;text-decoration:none;transition:all .3s;display:inline-block;text-align:center;}
 .btn-ghost:hover{background:rgba(192,192,192,0.08);border-color:var(--silver);color:#fff;}
 
-/* ── ATTENDANCE BUTTON ── */
 .btn-attend{
   font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.9rem;letter-spacing:3px;
   text-transform:uppercase;padding:12px 30px;
@@ -248,250 +247,64 @@ footer{position:relative;z-index:2;background:var(--black);border-top:1px solid 
 .fade-in{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
 .fade-in.visible{opacity:1;transform:translateY(0);}
 
-/* ══════════════════════════════════════
-   ATTENDANCE MODAL SYSTEM
-══════════════════════════════════════ */
-#attendanceModal {
-  display:none;
-  position:fixed;inset:0;z-index:9999;
-  align-items:center;justify-content:center;
-  padding:20px;
-}
-#attendanceModal.open { display:flex; }
+/* ATTENDANCE MODAL */
+#attendanceModal{display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;padding:20px;}
+#attendanceModal.open{display:flex;}
+.modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,0.88);backdrop-filter:blur(12px);cursor:pointer;}
+.modal-box{position:relative;z-index:1;width:100%;max-width:540px;background:linear-gradient(145deg,rgba(0,8,20,0.98),rgba(0,20,50,0.96));border:1px solid rgba(0,112,224,0.45);border-radius:14px;padding:40px 36px;box-shadow:0 0 60px rgba(0,112,224,0.25),0 0 120px rgba(0,50,140,0.15);animation:modalIn .35s cubic-bezier(0.34,1.56,0.64,1);overflow:hidden;}
+.modal-box::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:300px;height:300px;background:radial-gradient(circle,rgba(0,112,224,0.18),transparent 70%);border-radius:50%;pointer-events:none;}
+@keyframes modalIn{from{opacity:0;transform:scale(0.88) translateY(24px);}to{opacity:1;transform:scale(1) translateY(0);}}
+.modal-close{position:absolute;top:16px;right:18px;background:none;border:none;color:var(--silver-dark);font-size:1.4rem;cursor:pointer;transition:color .2s;line-height:1;padding:4px;}
+.modal-close:hover{color:#fff;}
+.modal-logo-row{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:20px;}
+.modal-logo-row img{width:44px;height:44px;border-radius:50%;border:2px solid #0070e0;box-shadow:0 0 14px rgba(0,112,224,0.6);}
+.modal-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:3px;background:linear-gradient(90deg,#0070e0,#60b0ff,#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.modal-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(0,112,224,0.5),transparent);margin-bottom:22px;}
+.modal-date-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(0,112,224,0.12);border:1px solid rgba(0,112,224,0.3);border-radius:20px;padding:5px 14px;font-family:'Rajdhani',sans-serif;font-size:.78rem;letter-spacing:2px;color:#60b0ff;text-transform:uppercase;margin-bottom:22px;}
+.modal-label{font-family:'Rajdhani',sans-serif;font-size:.76rem;letter-spacing:3px;color:#60b0ff;text-transform:uppercase;margin-bottom:8px;display:block;}
+.modal-search-wrap{position:relative;margin-bottom:6px;}
+.modal-search-wrap i{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#0070e0;font-size:.95rem;pointer-events:none;}
+#attendanceInput{width:100%;padding:13px 14px 13px 42px;background:rgba(0,30,70,0.6);border:1px solid rgba(0,112,224,0.35);border-radius:8px;color:#fff;font-family:'Exo 2',sans-serif;font-size:.97rem;outline:none;transition:border-color .25s,box-shadow .25s;}
+#attendanceInput:focus{border-color:#0070e0;box-shadow:0 0 0 3px rgba(0,112,224,0.15);}
+#attendanceInput::placeholder{color:rgba(255,255,255,0.28);}
+#autocompleteList{position:absolute;top:calc(100% + 4px);left:0;right:0;background:rgba(0,12,35,0.98);border:1px solid rgba(0,112,224,0.4);border-radius:8px;max-height:230px;overflow-y:auto;z-index:100;display:none;box-shadow:0 8px 32px rgba(0,0,0,0.7);}
+#autocompleteList.show{display:block;}
+#autocompleteList::-webkit-scrollbar{width:4px;}
+#autocompleteList::-webkit-scrollbar-thumb{background:#0070e0;border-radius:2px;}
+.autocomplete-item{padding:11px 16px;cursor:pointer;font-family:'Rajdhani',sans-serif;font-size:.97rem;color:var(--silver-light);letter-spacing:.5px;border-bottom:1px solid rgba(0,112,224,0.1);transition:background .15s;display:flex;align-items:center;gap:10px;}
+.autocomplete-item:last-child{border-bottom:none;}
+.autocomplete-item:hover,.autocomplete-item.selected{background:rgba(0,112,224,0.18);color:#fff;}
+.autocomplete-item i{color:#0070e0;font-size:.85rem;flex-shrink:0;}
+.autocomplete-item .match{color:#60b0ff;font-weight:700;}
+.modal-hint{font-family:'Rajdhani',sans-serif;font-size:.74rem;letter-spacing:1px;color:rgba(255,255,255,0.3);margin-top:6px;margin-bottom:22px;}
+#selectedChip{display:none;align-items:center;gap:10px;background:rgba(0,112,224,0.15);border:1px solid rgba(0,112,224,0.4);border-radius:8px;padding:12px 16px;margin-bottom:22px;}
+#selectedChip.show{display:flex;}
+.chip-name{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.05rem;letter-spacing:1px;color:#fff;flex:1;}
+.chip-icon{color:#0070e0;font-size:1.1rem;}
+.chip-clear{background:none;border:none;color:var(--silver-dark);cursor:pointer;font-size:1rem;padding:2px;transition:color .2s;}
+.chip-clear:hover{color:var(--red);}
+.modal-sheet-hint{background:rgba(0,112,224,0.08);border:1px solid rgba(0,112,224,0.2);border-radius:8px;padding:12px 14px;font-family:'Rajdhani',sans-serif;font-size:.8rem;color:#60b0ff;letter-spacing:.5px;margin-bottom:22px;display:flex;align-items:flex-start;gap:10px;}
+.modal-sheet-hint i{flex-shrink:0;margin-top:2px;color:#0070e0;}
+#submitAttendance{width:100%;padding:14px;background:linear-gradient(135deg,#0070e0,#004a9e);color:#fff;border:none;border-radius:8px;font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;cursor:pointer;position:relative;overflow:hidden;transition:transform .2s,box-shadow .3s;box-shadow:0 4px 20px rgba(0,112,224,0.4);display:flex;align-items:center;justify-content:center;gap:10px;}
+#submitAttendance:disabled{opacity:.55;cursor:not-allowed;}
+#submitAttendance:not(:disabled):hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,112,224,0.6);}
+#submitAttendance::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.12),transparent);transition:left .5s;}
+#submitAttendance:not(:disabled):hover::before{left:100%;}
+#attendanceResult{margin-top:18px;border-radius:8px;padding:14px 18px;font-family:'Rajdhani',sans-serif;font-size:.9rem;letter-spacing:1px;display:none;align-items:center;gap:12px;}
+#attendanceResult.success{display:flex;background:rgba(26,158,63,0.12);border:1px solid rgba(26,158,63,0.4);color:#4cde7f;}
+#attendanceResult.error{display:flex;background:rgba(226,0,26,0.12);border:1px solid rgba(226,0,26,0.4);color:#ff6b6b;}
+#attendanceResult i{font-size:1.2rem;flex-shrink:0;}
+#alreadyMarkedBanner{display:none;margin-top:12px;background:rgba(255,165,0,0.1);border:1px solid rgba(255,165,0,0.35);border-radius:8px;padding:12px 16px;font-family:'Rajdhani',sans-serif;font-size:.85rem;color:#ffa500;letter-spacing:.5px;align-items:center;gap:10px;}
+#alreadyMarkedBanner.show{display:flex;}
+#alreadyMarkedBanner i{flex-shrink:0;}
+.spinner{width:18px;height:18px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0;}
+@keyframes spin{to{transform:rotate(360deg);}}
 
-.modal-backdrop {
-  position:absolute;inset:0;
-  background:rgba(0,0,0,0.88);
-  backdrop-filter:blur(12px);
-  cursor:pointer;
-}
-
-.modal-box {
-  position:relative;z-index:1;
-  width:100%;max-width:540px;
-  background:linear-gradient(145deg,rgba(0,8,20,0.98),rgba(0,20,50,0.96));
-  border:1px solid rgba(0,112,224,0.45);
-  border-radius:14px;
-  padding:40px 36px;
-  box-shadow:0 0 60px rgba(0,112,224,0.25),0 0 120px rgba(0,50,140,0.15);
-  animation:modalIn .35s cubic-bezier(0.34,1.56,0.64,1);
-  overflow:hidden;
-}
-
-.modal-box::before {
-  content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);
-  width:300px;height:300px;
-  background:radial-gradient(circle,rgba(0,112,224,0.18),transparent 70%);
-  border-radius:50%;pointer-events:none;
-}
-
-@keyframes modalIn {
-  from { opacity:0; transform:scale(0.88) translateY(24px); }
-  to   { opacity:1; transform:scale(1) translateY(0); }
-}
-
-.modal-close {
-  position:absolute;top:16px;right:18px;
-  background:none;border:none;color:var(--silver-dark);
-  font-size:1.4rem;cursor:pointer;transition:color .2s;
-  line-height:1;padding:4px;
-}
-.modal-close:hover { color:#fff; }
-
-.modal-logo-row {
-  display:flex;align-items:center;justify-content:center;gap:12px;
-  margin-bottom:20px;
-}
-.modal-logo-row img {
-  width:44px;height:44px;border-radius:50%;
-  border:2px solid #0070e0;
-  box-shadow:0 0 14px rgba(0,112,224,0.6);
-}
-.modal-title {
-  font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:3px;
-  background:linear-gradient(90deg,#0070e0,#60b0ff,#fff);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-
-.modal-divider {
-  height:1px;background:linear-gradient(90deg,transparent,rgba(0,112,224,0.5),transparent);
-  margin-bottom:22px;
-}
-
-.modal-date-badge {
-  display:inline-flex;align-items:center;gap:7px;
-  background:rgba(0,112,224,0.12);
-  border:1px solid rgba(0,112,224,0.3);
-  border-radius:20px;padding:5px 14px;
-  font-family:'Rajdhani',sans-serif;font-size:.78rem;
-  letter-spacing:2px;color:#60b0ff;
-  text-transform:uppercase;margin-bottom:22px;
-}
-.modal-date-badge i { font-size:.8rem; }
-
-.modal-label {
-  font-family:'Rajdhani',sans-serif;font-size:.76rem;letter-spacing:3px;
-  color:#60b0ff;text-transform:uppercase;margin-bottom:8px;
-  display:block;
-}
-
-.modal-search-wrap {
-  position:relative;margin-bottom:6px;
-}
-.modal-search-wrap i {
-  position:absolute;left:14px;top:50%;transform:translateY(-50%);
-  color:#0070e0;font-size:.95rem;pointer-events:none;
-}
-#attendanceInput {
-  width:100%;padding:13px 14px 13px 42px;
-  background:rgba(0,30,70,0.6);
-  border:1px solid rgba(0,112,224,0.35);
-  border-radius:8px;color:#fff;font-family:'Exo 2',sans-serif;
-  font-size:.97rem;outline:none;
-  transition:border-color .25s,box-shadow .25s;
-}
-#attendanceInput:focus {
-  border-color:#0070e0;
-  box-shadow:0 0 0 3px rgba(0,112,224,0.15);
-}
-#attendanceInput::placeholder { color:rgba(255,255,255,0.28); }
-
-/* Autocomplete dropdown */
-#autocompleteList {
-  position:absolute;top:calc(100% + 4px);left:0;right:0;
-  background:rgba(0,12,35,0.98);
-  border:1px solid rgba(0,112,224,0.4);
-  border-radius:8px;max-height:230px;overflow-y:auto;
-  z-index:100;display:none;
-  box-shadow:0 8px 32px rgba(0,0,0,0.7);
-}
-#autocompleteList.show { display:block; }
-#autocompleteList::-webkit-scrollbar { width:4px; }
-#autocompleteList::-webkit-scrollbar-thumb { background:#0070e0;border-radius:2px; }
-.autocomplete-item {
-  padding:11px 16px;cursor:pointer;
-  font-family:'Rajdhani',sans-serif;font-size:.97rem;
-  color:var(--silver-light);letter-spacing:.5px;
-  border-bottom:1px solid rgba(0,112,224,0.1);
-  transition:background .15s;display:flex;align-items:center;gap:10px;
-}
-.autocomplete-item:last-child { border-bottom:none; }
-.autocomplete-item:hover, .autocomplete-item.selected {
-  background:rgba(0,112,224,0.18);color:#fff;
-}
-.autocomplete-item i { color:#0070e0;font-size:.85rem;flex-shrink:0; }
-.autocomplete-item .match { color:#60b0ff;font-weight:700; }
-
-.modal-hint {
-  font-family:'Rajdhani',sans-serif;font-size:.74rem;letter-spacing:1px;
-  color:rgba(255,255,255,0.3);margin-top:6px;margin-bottom:22px;
-}
-
-/* Selected name chip */
-#selectedChip {
-  display:none;align-items:center;gap:10px;
-  background:rgba(0,112,224,0.15);
-  border:1px solid rgba(0,112,224,0.4);
-  border-radius:8px;padding:12px 16px;
-  margin-bottom:22px;
-}
-#selectedChip.show { display:flex; }
-.chip-name {
-  font-family:'Rajdhani',sans-serif;font-weight:700;
-  font-size:1.05rem;letter-spacing:1px;color:#fff;flex:1;
-}
-.chip-icon { color:#0070e0;font-size:1.1rem; }
-.chip-clear {
-  background:none;border:none;color:var(--silver-dark);
-  cursor:pointer;font-size:1rem;padding:2px;transition:color .2s;
-}
-.chip-clear:hover { color:var(--red); }
-
-/* Google Sheet config */
-.modal-sheet-hint {
-  background:rgba(0,112,224,0.08);
-  border:1px solid rgba(0,112,224,0.2);
-  border-radius:8px;padding:12px 14px;
-  font-family:'Rajdhani',sans-serif;font-size:.8rem;
-  color:#60b0ff;letter-spacing:.5px;margin-bottom:22px;
-  display:flex;align-items:flex-start;gap:10px;
-}
-.modal-sheet-hint i { flex-shrink:0;margin-top:2px;color:#0070e0; }
-
-/* Submit button */
-#submitAttendance {
-  width:100%;padding:14px;
-  background:linear-gradient(135deg,#0070e0,#004a9e);
-  color:#fff;border:none;border-radius:8px;
-  font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;
-  letter-spacing:3px;text-transform:uppercase;
-  cursor:pointer;position:relative;overflow:hidden;
-  transition:transform .2s,box-shadow .3s;
-  box-shadow:0 4px 20px rgba(0,112,224,0.4);
-  display:flex;align-items:center;justify-content:center;gap:10px;
-}
-#submitAttendance:disabled { opacity:.55;cursor:not-allowed; }
-#submitAttendance:not(:disabled):hover { transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,112,224,0.6); }
-#submitAttendance::before { content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.12),transparent);transition:left .5s; }
-#submitAttendance:not(:disabled):hover::before { left:100%; }
-
-/* Result states */
-#attendanceResult {
-  margin-top:18px;border-radius:8px;padding:14px 18px;
-  font-family:'Rajdhani',sans-serif;font-size:.9rem;letter-spacing:1px;
-  display:none;align-items:center;gap:12px;
-}
-#attendanceResult.success {
-  display:flex;background:rgba(26,158,63,0.12);
-  border:1px solid rgba(26,158,63,0.4);color:#4cde7f;
-}
-#attendanceResult.error {
-  display:flex;background:rgba(226,0,26,0.12);
-  border:1px solid rgba(226,0,26,0.4);color:#ff6b6b;
-}
-#attendanceResult i { font-size:1.2rem;flex-shrink:0; }
-
-/* Already marked banner */
-#alreadyMarkedBanner {
-  display:none;margin-top:12px;
-  background:rgba(255,165,0,0.1);
-  border:1px solid rgba(255,165,0,0.35);
-  border-radius:8px;padding:12px 16px;
-  font-family:'Rajdhani',sans-serif;font-size:.85rem;
-  color:#ffa500;letter-spacing:.5px;
-  align-items:center;gap:10px;
-}
-#alreadyMarkedBanner.show { display:flex; }
-#alreadyMarkedBanner i { flex-shrink:0; }
-
-/* Loader spinner */
-.spinner {
-  width:18px;height:18px;border:2px solid rgba(255,255,255,0.3);
-  border-top-color:#fff;border-radius:50%;
-  animation:spin .7s linear infinite;flex-shrink:0;
-}
-@keyframes spin { to { transform:rotate(360deg); } }
-
-/* ── Floating Attendance FAB ── */
-#attendFAB {
-  position:fixed;bottom:28px;right:28px;z-index:900;
-  width:62px;height:62px;border-radius:50%;
-  background:linear-gradient(135deg,#0070e0,#004a9e);
-  color:#fff;border:none;cursor:pointer;
-  font-size:1.4rem;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 6px 28px rgba(0,112,224,0.55);
-  transition:transform .25s,box-shadow .3s;
-}
-#attendFAB:hover { transform:scale(1.12);box-shadow:0 10px 36px rgba(0,112,224,0.75); }
-#attendFAB .fab-tooltip {
-  position:absolute;bottom:calc(100% + 10px);right:0;
-  background:rgba(0,0,0,0.9);color:#fff;
-  font-family:'Rajdhani',sans-serif;font-size:.78rem;letter-spacing:2px;
-  padding:6px 12px;border-radius:4px;white-space:nowrap;
-  opacity:0;pointer-events:none;transition:opacity .2s;
-}
-#attendFAB:hover .fab-tooltip { opacity:1; }
+/* FAB */
+#attendFAB{position:fixed;bottom:28px;right:28px;z-index:900;width:62px;height:62px;border-radius:50%;background:linear-gradient(135deg,#0070e0,#004a9e);color:#fff;border:none;cursor:pointer;font-size:1.4rem;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 28px rgba(0,112,224,0.55);transition:transform .25s,box-shadow .3s;}
+#attendFAB:hover{transform:scale(1.12);box-shadow:0 10px 36px rgba(0,112,224,0.75);}
+#attendFAB .fab-tooltip{position:absolute;bottom:calc(100% + 10px);right:0;background:rgba(0,0,0,0.9);color:#fff;font-family:'Rajdhani',sans-serif;font-size:.78rem;letter-spacing:2px;padding:6px 12px;border-radius:4px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s;}
+#attendFAB:hover .fab-tooltip{opacity:1;}
 
 /* RESPONSIVE */
 @media(max-width:900px){
@@ -558,7 +371,7 @@ footer{position:relative;z-index:2;background:var(--black);border-top:1px solid 
 
 <canvas id="stars-canvas"></canvas>
 
-<!-- ═══ NAVBAR ═══ -->
+<!-- NAVBAR -->
 <nav id="navbar">
   <a href="#home" class="nav-logo">
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIdlORy3LdN8tmkx0eRpfI599od1wMrqr5Hw&s" alt="ALVIC GYM Logo"/>
@@ -578,7 +391,6 @@ footer{position:relative;z-index:2;background:var(--black);border-top:1px solid 
   </div>
 </nav>
 
-<!-- Mobile drawer -->
 <div class="mobile-drawer" id="mobileDrawer">
   <a href="#home"     onclick="closeMenu()">Home</a>
   <a href="#about"    onclick="closeMenu()">About</a>
@@ -587,7 +399,7 @@ footer{position:relative;z-index:2;background:var(--black);border-top:1px solid 
   <a href="#contact"  onclick="closeMenu()">Contact</a>
 </div>
 
-<!-- ═══ HERO ═══ -->
+<!-- HERO -->
 <section id="home">
   <div class="hero-bg-img"></div>
   <div class="hero-overlay"></div>
@@ -624,7 +436,7 @@ footer{position:relative;z-index:2;background:var(--black);border-top:1px solid 
 
 <div class="red-divider"></div>
 
-<!-- ═══ CAROUSEL ═══ -->
+<!-- CAROUSEL -->
 <div class="carousel-section" id="carousel">
   <div class="carousel-track" id="carouselTrack">
     <div class="carousel-slide active" id="slide0">
@@ -650,7 +462,7 @@ footer{position:relative;z-index:2;background:var(--black);border-top:1px solid 
   </div>
 </div>
 
-<!-- ═══ QUOTE BAND ═══ -->
+<!-- QUOTE BAND -->
 <div class="quote-band fade-in">
   <div class="quote-inner">
     <div class="quote-icon">&ldquo;</div>
@@ -660,7 +472,7 @@ footer{position:relative;z-index:2;background:var(--black);border-top:1px solid 
   </div>
 </div>
 
-<!-- ═══ ABOUT ═══ -->
+<!-- ABOUT -->
 <section id="about">
   <div class="section-inner">
     <div class="about-grid">
@@ -691,7 +503,7 @@ footer{position:relative;z-index:2;background:var(--black);border-top:1px solid 
 
 <div class="red-divider"></div>
 
-<!-- ═══ SERVICES ═══ -->
+<!-- SERVICES -->
 <section id="services">
   <div class="section-inner">
     <div class="section-header fade-in">
@@ -712,7 +524,7 @@ footer{position:relative;z-index:2;background:var(--black);border-top:1px solid 
   </div>
 </section>
 
-<!-- ═══ PRICING ═══ -->
+<!-- PRICING -->
 <section id="pricing">
   <div class="section-inner">
     <div class="section-header fade-in">
@@ -742,7 +554,7 @@ footer{position:relative;z-index:2;background:var(--black);border-top:1px solid 
 
 <div class="red-divider"></div>
 
-<!-- ═══ CONTACT ═══ -->
+<!-- CONTACT -->
 <section id="contact">
   <div class="section-inner">
     <div class="section-header fade-in">
@@ -776,7 +588,7 @@ footer{position:relative;z-index:2;background:var(--black);border-top:1px solid 
   </div>
 </section>
 
-<!-- ═══ FOOTER ═══ -->
+<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
     <div class="footer-top">
@@ -796,35 +608,28 @@ footer{position:relative;z-index:2;background:var(--black);border-top:1px solid 
   </div>
 </footer>
 
-<!-- ════════════════════════════════════
-     FLOATING ATTENDANCE BUTTON (FAB)
-════════════════════════════════════ -->
+<!-- FAB -->
 <button id="attendFAB" onclick="openAttendance()" title="Mark Attendance">
   <i class="fas fa-calendar-check"></i>
   <span class="fab-tooltip">Mark Attendance</span>
 </button>
 
-<!-- ════════════════════════════════════
-     ATTENDANCE MODAL
-════════════════════════════════════ -->
+<!-- ATTENDANCE MODAL -->
 <div id="attendanceModal" role="dialog" aria-modal="true" aria-label="Attendance">
   <div class="modal-backdrop" onclick="closeAttendance()"></div>
   <div class="modal-box">
     <button class="modal-close" onclick="closeAttendance()" aria-label="Close">&times;</button>
-
     <div class="modal-logo-row">
       <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIdlORy3LdN8tmkx0eRpfI599od1wMrqr5Hw&s" alt="Logo"/>
       <span class="modal-title">Mark Attendance</span>
     </div>
     <div class="modal-divider"></div>
-
     <div style="text-align:center;margin-bottom:18px;">
       <span class="modal-date-badge">
         <i class="fas fa-calendar-day"></i>
         <span id="todayDate">—</span>
       </span>
     </div>
-
     <label class="modal-label" for="attendanceInput">
       <i class="fas fa-search" style="margin-right:6px;"></i>Search Your Name
     </label>
@@ -834,44 +639,23 @@ footer{position:relative;z-index:2;background:var(--black);border-top:1px solid 
       <div id="autocompleteList"></div>
     </div>
     <p class="modal-hint">Start typing to find your name from the list — II B.COM CA-B (2023–26)</p>
-
-    <!-- Selected chip -->
     <div id="selectedChip">
       <i class="fas fa-user-check chip-icon"></i>
       <span class="chip-name" id="chipNameText">—</span>
       <button class="chip-clear" onclick="clearSelection()" title="Clear"><i class="fas fa-times"></i></button>
     </div>
-
-    <!-- Already marked warning -->
     <div id="alreadyMarkedBanner">
       <i class="fas fa-exclamation-triangle"></i>
       <span id="alreadyMarkedText">Attendance already marked today.</span>
     </div>
-
-    <!-- Google Sheet info hint -->
     <div class="modal-sheet-hint">
       <i class="fas fa-table"></i>
-      <span>Attendance will be saved to your Google Sheet automatically with name, date &amp; time. <strong style="color:#fff;">Paste your Google Apps Script Web App URL below once.</strong></span>
+      <span>Attendance will be saved to your Google Sheet automatically. <strong style="color:#fff;">Paste your Google Apps Script Web App URL below once.</strong></span>
     </div>
-
-    <!-- Apps Script URL config (shown only if not set) -->
-    <div id="scriptUrlConfig" style="margin-bottom:18px;">
-      <label class="modal-label" for="scriptUrlInput">
-        <i class="fas fa-link" style="margin-right:6px;"></i>Google Apps Script URL <span style="color:rgba(255,255,255,0.35);font-size:.7rem;">(one-time setup)</span>
-      </label>
-      <input type="url" id="scriptUrlInput" placeholder="https://script.google.com/macros/s/…/exec"
-        style="width:100%;padding:11px 14px;background:rgba(0,30,70,0.6);border:1px solid rgba(0,112,224,0.3);border-radius:8px;color:#fff;font-family:'Exo 2',sans-serif;font-size:.88rem;outline:none;margin-bottom:8px;"
-        autocomplete="off"/>
-      <button onclick="saveScriptUrl()" style="padding:8px 18px;background:rgba(0,112,224,0.25);border:1px solid rgba(0,112,224,0.5);border-radius:6px;color:#60b0ff;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:2px;cursor:pointer;transition:all .2s;">
-        <i class="fas fa-save" style="margin-right:6px;"></i>SAVE URL
-      </button>
-      <p style="font-family:'Rajdhani',sans-serif;font-size:.7rem;color:rgba(255,255,255,0.25);margin-top:6px;letter-spacing:.5px;">Saved locally in your browser. Never shared.</p>
-    </div>
-
+    <div id="scriptUrlConfig" style="margin-bottom:18px;"></div>
     <button id="submitAttendance" onclick="submitAttendance()" disabled>
       <i class="fas fa-calendar-check"></i> Submit Attendance
     </button>
-
     <div id="attendanceResult">
       <i class="fas fa-check-circle"></i>
       <span id="attendanceResultText">Attendance marked successfully!</span>
@@ -879,11 +663,8 @@ footer{position:relative;z-index:2;background:var(--black);border-top:1px solid 
   </div>
 </div>
 
-<!-- ════════════════════════════════════
-     SCRIPTS
-════════════════════════════════════ -->
 <script>
-/* ─── GALAXY STARS ─── */
+/* STARS */
 (function(){
   const canvas=document.getElementById('stars-canvas');
   const ctx=canvas.getContext('2d');
@@ -908,12 +689,6 @@ footer{position:relative;z-index:2;background:var(--black);border-top:1px solid 
       else if(s.kind>0.62) color=`rgba(180,180,180,${alpha})`;
       else color=`rgba(255,255,255,${alpha})`;
       ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=color;ctx.fill();
-      if(s.r>1.15){
-        const g=ctx.createRadialGradient(s.x,s.y,0,s.x,s.y,s.r*4);
-        const glowC=s.kind>0.94?`rgba(226,0,26,${alpha*0.18})`:`rgba(255,255,255,${alpha*0.08})`;
-        g.addColorStop(0,glowC);g.addColorStop(1,'rgba(0,0,0,0)');
-        ctx.beginPath();ctx.arc(s.x,s.y,s.r*4,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();
-      }
     });
     requestAnimationFrame(draw);
   }
@@ -921,7 +696,7 @@ footer{position:relative;z-index:2;background:var(--black);border-top:1px solid 
   resize();draw();
 })();
 
-/* ─── NAVBAR ─── */
+/* NAVBAR */
 const navbar=document.getElementById('navbar');
 window.addEventListener('scroll',()=>{
   navbar.classList.toggle('shrunk',window.scrollY>80);
@@ -930,7 +705,7 @@ window.addEventListener('scroll',()=>{
   document.querySelectorAll('.nav-links a').forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+cur);});
 });
 
-/* ─── HAMBURGER ─── */
+/* HAMBURGER */
 function toggleMenu(){
   document.getElementById('mobileDrawer').classList.toggle('open');
   document.getElementById('hamburger').classList.toggle('open');
@@ -940,7 +715,7 @@ function closeMenu(){
   document.getElementById('hamburger').classList.remove('open');
 }
 
-/* ─── CAROUSEL ─── */
+/* CAROUSEL */
 let curSlide=0;const totalSlides=3;let autoTimer;const padded=['01','02','03'];
 function goToSlide(n){
   document.getElementById('slide'+curSlide).classList.remove('active');
@@ -963,15 +738,13 @@ resetAuto();
   el.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>40)carouselMove(dx<0?1:-1);},{passive:true});
 })();
 
-/* ─── FADE-IN ─── */
+/* FADE IN */
 const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.1});
 document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
 
-/* ════════════════════════════════════
+/* ══════════════════════════════
    ATTENDANCE SYSTEM
-════════════════════════════════════ */
-
-// ── Student list from II B.COM CA-B (2023-26) ──
+══════════════════════════════ */
 const STUDENTS = [
   "AJAY M","AKASH K","AMIRTHA VARSINI S","ANITHA A","ANTRIYA RACHEL S",
   "ARUMAI BALAJI M","ASHWATH B S","AUGUSTINE P","BHARANIDHARAN G","BHARATHI N",
@@ -988,69 +761,74 @@ const STUDENTS = [
 
 const STORAGE_KEY = 'alvic_attendance_log';
 const SCRIPT_KEY  = 'alvic_apps_script_url';
-
 let selectedStudent = null;
 
-// ── Helpers ──
 function todayStr(){
-  const d = new Date();
-  return d.toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  return new Date().toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
 }
 function todayKey(){
-  const d = new Date();
+  const d=new Date();
   return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 }
 function nowTimeStr(){
   return new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
 }
-
-// ── Local log ──
 function getLog(){
-  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}'); }
-  catch(e){ return {}; }
+  try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}');}catch(e){return {};}
 }
 function isMarkedToday(name){
-  const log = getLog();
-  const key = todayKey();
-  return !!(log[key] && log[key].includes(name));
+  const log=getLog();const key=todayKey();
+  return !!(log[key]&&log[key].includes(name));
 }
 function markLocalLog(name){
-  const log = getLog();
-  const key = todayKey();
-  if(!log[key]) log[key]=[];
-  if(!log[key].includes(name)) log[key].push(name);
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(log));
+  const log=getLog();const key=todayKey();
+  if(!log[key])log[key]=[];
+  if(!log[key].includes(name))log[key].push(name);
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(log));
 }
+function getScriptUrl(){return localStorage.getItem(SCRIPT_KEY)||'';}
 
-// ── Script URL config ──
-function getScriptUrl(){ return localStorage.getItem(SCRIPT_KEY)||''; }
 function saveScriptUrl(){
-  const url = document.getElementById('scriptUrlInput').value.trim();
-  if(!url){ alert('Please enter a valid URL.'); return; }
-  localStorage.setItem(SCRIPT_KEY, url);
-  document.getElementById('scriptUrlConfig').innerHTML =
-    `<div style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(26,158,63,0.1);border:1px solid rgba(26,158,63,0.3);border-radius:8px;margin-bottom:18px;">
-      <i class="fas fa-check-circle" style="color:#4cde7f;"></i>
-      <span style="font-family:'Rajdhani',sans-serif;font-size:.85rem;color:#4cde7f;letter-spacing:.5px;">Google Sheet URL saved!</span>
-      <button onclick="resetScriptUrl()" style="margin-left:auto;background:none;border:none;color:rgba(255,255,255,0.35);cursor:pointer;font-size:.8rem;font-family:'Rajdhani',sans-serif;">Change</button>
-    </div>`;
+  const url=document.getElementById('scriptUrlInput').value.trim();
+  if(!url){alert('Please enter a valid URL.');return;}
+  localStorage.setItem(SCRIPT_KEY,url);
+  renderScriptConfig();
 }
 function resetScriptUrl(){
   localStorage.removeItem(SCRIPT_KEY);
-  openAttendance(); // re-render
+  renderScriptConfig();
 }
 
-// ── Modal open/close ──
+function renderScriptConfig(){
+  const saved=getScriptUrl();
+  const cfg=document.getElementById('scriptUrlConfig');
+  if(saved){
+    cfg.innerHTML=`<div style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(26,158,63,0.1);border:1px solid rgba(26,158,63,0.3);border-radius:8px;">
+      <i class="fas fa-check-circle" style="color:#4cde7f;"></i>
+      <span style="font-family:'Rajdhani',sans-serif;font-size:.85rem;color:#4cde7f;letter-spacing:.5px;">Google Sheet connected ✓</span>
+      <button onclick="resetScriptUrl()" style="margin-left:auto;background:none;border:none;color:rgba(255,255,255,0.35);cursor:pointer;font-size:.8rem;font-family:'Rajdhani',sans-serif;">Change</button>
+    </div>`;
+  } else {
+    cfg.innerHTML=`
+      <label class="modal-label" for="scriptUrlInput">
+        <i class="fas fa-link" style="margin-right:6px;"></i>Google Apps Script URL <span style="color:rgba(255,255,255,0.35);font-size:.7rem;">(one-time setup)</span>
+      </label>
+      <input type="url" id="scriptUrlInput" placeholder="https://script.google.com/macros/s/…/exec"
+        style="width:100%;padding:11px 14px;background:rgba(0,30,70,0.6);border:1px solid rgba(0,112,224,0.3);border-radius:8px;color:#fff;font-family:'Exo 2',sans-serif;font-size:.88rem;outline:none;margin-bottom:8px;"
+        autocomplete="off"/>
+      <button onclick="saveScriptUrl()" style="padding:8px 18px;background:rgba(0,112,224,0.25);border:1px solid rgba(0,112,224,0.5);border-radius:6px;color:#60b0ff;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:2px;cursor:pointer;">
+        <i class="fas fa-save" style="margin-right:6px;"></i>SAVE URL
+      </button>
+      <p style="font-family:'Rajdhani',sans-serif;font-size:.7rem;color:rgba(255,255,255,0.25);margin-top:6px;">Saved locally in your browser. Never shared.</p>`;
+  }
+}
+
 function openAttendance(){
-  selectedStudent = null;
-  const modal = document.getElementById('attendanceModal');
+  selectedStudent=null;
+  const modal=document.getElementById('attendanceModal');
   modal.classList.add('open');
   document.body.style.overflow='hidden';
-
-  // Set today date
-  document.getElementById('todayDate').textContent = todayStr();
-
-  // Reset UI
+  document.getElementById('todayDate').textContent=todayStr();
   document.getElementById('attendanceInput').value='';
   document.getElementById('autocompleteList').innerHTML='';
   document.getElementById('autocompleteList').classList.remove('show');
@@ -1058,31 +836,9 @@ function openAttendance(){
   document.getElementById('alreadyMarkedBanner').classList.remove('show');
   document.getElementById('attendanceResult').className='';
   document.getElementById('submitAttendance').disabled=true;
-
-  // Script URL config
-  const saved = getScriptUrl();
-  const cfg = document.getElementById('scriptUrlConfig');
-  if(saved){
-    cfg.innerHTML = `<div style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(26,158,63,0.1);border:1px solid rgba(26,158,63,0.3);border-radius:8px;margin-bottom:18px;">
-      <i class="fas fa-check-circle" style="color:#4cde7f;"></i>
-      <span style="font-family:'Rajdhani',sans-serif;font-size:.85rem;color:#4cde7f;letter-spacing:.5px;">Google Sheet connected ✓</span>
-      <button onclick="resetScriptUrl()" style="margin-left:auto;background:none;border:none;color:rgba(255,255,255,0.35);cursor:pointer;font-size:.8rem;font-family:'Rajdhani',sans-serif;">Change</button>
-    </div>`;
-  } else {
-    cfg.innerHTML = `
-      <label class="modal-label" for="scriptUrlInput">
-        <i class="fas fa-link" style="margin-right:6px;"></i>Google Apps Script URL <span style="color:rgba(255,255,255,0.35);font-size:.7rem;">(one-time setup)</span>
-      </label>
-      <input type="url" id="scriptUrlInput" placeholder="https://script.google.com/macros/s/…/exec"
-        style="width:100%;padding:11px 14px;background:rgba(0,30,70,0.6);border:1px solid rgba(0,112,224,0.3);border-radius:8px;color:#fff;font-family:'Exo 2',sans-serif;font-size:.88rem;outline:none;margin-bottom:8px;"
-        autocomplete="off"/>
-      <button onclick="saveScriptUrl()" style="padding:8px 18px;background:rgba(0,112,224,0.25);border:1px solid rgba(0,112,224,0.5);border-radius:6px;color:#60b0ff;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:2px;cursor:pointer;transition:all .2s;">
-        <i class="fas fa-save" style="margin-right:6px;"></i>SAVE URL
-      </button>
-      <p style="font-family:'Rajdhani',sans-serif;font-size:.7rem;color:rgba(255,255,255,0.25);margin-top:6px;letter-spacing:.5px;">Saved locally in your browser. Never shared.</p>`;
-  }
-
-  setTimeout(()=>document.getElementById('attendanceInput').focus(), 200);
+  document.getElementById('submitAttendance').innerHTML='<i class="fas fa-calendar-check"></i> Submit Attendance';
+  renderScriptConfig();
+  setTimeout(()=>document.getElementById('attendanceInput').focus(),200);
 }
 
 function closeAttendance(){
@@ -1090,76 +846,49 @@ function closeAttendance(){
   document.body.style.overflow='';
 }
 
-// ── Autocomplete ──
-document.getElementById('attendanceInput').addEventListener('input', function(){
-  const query = this.value.trim().toUpperCase();
-  const list  = document.getElementById('autocompleteList');
-
-  // Clear selection if user edits
+/* Autocomplete */
+document.getElementById('attendanceInput').addEventListener('input',function(){
+  const query=this.value.trim().toUpperCase();
+  const list=document.getElementById('autocompleteList');
   if(selectedStudent){
     selectedStudent=null;
     document.getElementById('selectedChip').classList.remove('show');
     document.getElementById('submitAttendance').disabled=true;
     document.getElementById('alreadyMarkedBanner').classList.remove('show');
   }
-
-  if(!query){ list.innerHTML=''; list.classList.remove('show'); return; }
-
-  const matches = STUDENTS.filter(s => s.includes(query));
-  if(!matches.length){ list.innerHTML='<div class="autocomplete-item" style="color:rgba(255,255,255,0.35);cursor:default;"><i class="fas fa-search"></i> No match found</div>'; list.classList.add('show'); return; }
-
-  list.innerHTML = matches.slice(0,12).map(name=>{
-    const hi = name.replace(new RegExp(query,'g'), m=>`<span class="match">${m}</span>`);
+  if(!query){list.innerHTML='';list.classList.remove('show');return;}
+  const matches=STUDENTS.filter(s=>s.includes(query));
+  if(!matches.length){
+    list.innerHTML='<div class="autocomplete-item" style="color:rgba(255,255,255,0.35);cursor:default;"><i class="fas fa-search"></i> No match found</div>';
+    list.classList.add('show');return;
+  }
+  list.innerHTML=matches.slice(0,12).map(name=>{
+    const hi=name.replace(new RegExp(query,'g'),m=>`<span class="match">${m}</span>`);
     return `<div class="autocomplete-item" onclick="selectStudent('${name.replace(/'/g,"\\'")}')"><i class="fas fa-user"></i>${hi}</div>`;
   }).join('');
   list.classList.add('show');
 });
 
-document.getElementById('attendanceInput').addEventListener('keydown', function(e){
-  const items = document.querySelectorAll('.autocomplete-item');
-  const sel   = document.querySelector('.autocomplete-item.selected');
-  if(e.key==='ArrowDown'){
-    e.preventDefault();
-    const next = sel ? sel.nextElementSibling : items[0];
-    if(sel) sel.classList.remove('selected');
-    if(next) next.classList.add('selected');
-  } else if(e.key==='ArrowUp'){
-    e.preventDefault();
-    const prev = sel ? sel.previousElementSibling : items[items.length-1];
-    if(sel) sel.classList.remove('selected');
-    if(prev) prev.classList.add('selected');
-  } else if(e.key==='Enter'){
-    e.preventDefault();
-    if(sel) sel.click();
-  } else if(e.key==='Escape'){
-    closeAttendance();
-  }
-});
-
-// Close dropdown on outside click
-document.addEventListener('mousedown', function(e){
-  if(!document.getElementById('attendanceModal').contains(e.target)) return;
-  if(!e.target.closest('#autocompleteList') && !e.target.closest('#attendanceInput')){
-    document.getElementById('autocompleteList').classList.remove('show');
-  }
+document.getElementById('attendanceInput').addEventListener('keydown',function(e){
+  const items=document.querySelectorAll('.autocomplete-item');
+  const sel=document.querySelector('.autocomplete-item.selected');
+  if(e.key==='ArrowDown'){e.preventDefault();const next=sel?sel.nextElementSibling:items[0];if(sel)sel.classList.remove('selected');if(next)next.classList.add('selected');}
+  else if(e.key==='ArrowUp'){e.preventDefault();const prev=sel?sel.previousElementSibling:items[items.length-1];if(sel)sel.classList.remove('selected');if(prev)prev.classList.add('selected');}
+  else if(e.key==='Enter'){e.preventDefault();if(sel)sel.click();}
+  else if(e.key==='Escape'){closeAttendance();}
 });
 
 function selectStudent(name){
-  selectedStudent = name;
-  document.getElementById('attendanceInput').value = name;
+  selectedStudent=name;
+  document.getElementById('attendanceInput').value=name;
   document.getElementById('autocompleteList').innerHTML='';
   document.getElementById('autocompleteList').classList.remove('show');
-
-  // Show chip
-  document.getElementById('chipNameText').textContent = name;
+  document.getElementById('chipNameText').textContent=name;
   document.getElementById('selectedChip').classList.add('show');
-
-  // Check already marked
   document.getElementById('alreadyMarkedBanner').classList.remove('show');
   document.getElementById('attendanceResult').className='';
-
   if(isMarkedToday(name)){
-    document.getElementById('alreadyMarkedText').textContent = `${name} — attendance already marked today (${todayKey()}).`;
+    document.getElementById('alreadyMarkedText').textContent=`${name} — attendance already marked today.`;
     document.getElementById('alreadyMarkedBanner').classList.add('show');
     document.getElementById('submitAttendance').disabled=true;
   } else {
@@ -1177,56 +906,63 @@ function clearSelection(){
   document.getElementById('attendanceInput').focus();
 }
 
-// ── Submit ──
+/* ── SUBMIT — uses Image() to bypass CORS on mobile ── */
 async function submitAttendance(){
-  if(!selectedStudent) return;
+  if(!selectedStudent)return;
 
-  const btn = document.getElementById('submitAttendance');
-  const result = document.getElementById('attendanceResult');
-  const resultText = document.getElementById('attendanceResultText');
+  const btn=document.getElementById('submitAttendance');
+  const result=document.getElementById('attendanceResult');
 
   btn.disabled=true;
   btn.innerHTML='<div class="spinner"></div> Submitting…';
   result.className='';
 
-  const payload = {
-    name: selectedStudent,
-    date: todayKey(),
-    time: nowTimeStr(),
-    class: 'II B.COM CA-B (2023-26)'
-  };
-
+  const name  = selectedStudent;
+  const date  = todayKey();
+  const time  = nowTimeStr();
+  const cls   = 'II B.COM CA-B (2023-26)';
   const scriptUrl = getScriptUrl();
 
   try {
     if(scriptUrl){
-      // Send to Google Sheets via Apps Script
-      const url = `${scriptUrl}?name=${encodeURIComponent(payload.name)}&date=${encodeURIComponent(payload.date)}&time=${encodeURIComponent(payload.time)}&cls=${encodeURIComponent(payload.class)}`;
-      await fetch(url, { method:'GET', mode:'no-cors' });
+      /* ✅ Image() method — works on mobile, bypasses CORS completely */
+      const url = scriptUrl
+        + "?name=" + encodeURIComponent(name)
+        + "&date=" + encodeURIComponent(date)
+        + "&time=" + encodeURIComponent(time)
+        + "&cls="  + encodeURIComponent(cls);
+
+      await new Promise((resolve) => {
+        const img = new Image();
+        img.onload  = resolve;
+        img.onerror = resolve; /* resolve even on error — data was still sent */
+        img.src = url;
+        /* fallback timeout */
+        setTimeout(resolve, 3000);
+      });
     }
-    // Always mark locally too
-    markLocalLog(selectedStudent);
+
+    /* Always mark locally */
+    markLocalLog(name);
 
     result.className='success';
-    result.innerHTML=`<i class="fas fa-check-circle"></i><span>✅ Attendance marked for <strong>${selectedStudent}</strong> on ${payload.date} at ${payload.time}${scriptUrl ? ' — saved to Google Sheet!' : ' (locally saved)'}</span>`;
+    result.innerHTML=`<i class="fas fa-check-circle"></i><span>✅ Attendance marked for <strong>${name}</strong> on ${date} at ${time}${scriptUrl?' — saved to Google Sheet!':' (locally saved)'}</span>`;
     btn.innerHTML='<i class="fas fa-calendar-check"></i> Attendance Marked!';
 
-    // Auto close after 3s
-    setTimeout(()=>closeAttendance(), 3200);
+    setTimeout(()=>closeAttendance(),3000);
 
   } catch(err){
-    // Even on network error, save locally
-    markLocalLog(selectedStudent);
+    markLocalLog(name);
     result.className='success';
-    result.innerHTML=`<i class="fas fa-check-circle"></i><span>Attendance marked locally for <strong>${selectedStudent}</strong>. Check your network for Google Sheet sync.</span>`;
+    result.innerHTML=`<i class="fas fa-check-circle"></i><span>Marked locally for <strong>${name}</strong>. Check network for sheet sync.</span>`;
     btn.innerHTML='<i class="fas fa-calendar-check"></i> Marked Locally';
-    setTimeout(()=>closeAttendance(), 3200);
+    setTimeout(()=>closeAttendance(),3000);
   }
 }
 
-// ── ESC key ──
-document.addEventListener('keydown', e=>{ if(e.key==='Escape' && document.getElementById('attendanceModal').classList.contains('open')) closeAttendance(); });
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&document.getElementById('attendanceModal').classList.contains('open'))closeAttendance();
+});
 </script>
-
 </body>
 </html>
